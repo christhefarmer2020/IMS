@@ -1,0 +1,55 @@
+﻿@model IEnumerable<IMS.Models.EncounterImage>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Image_Data)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Consent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Appointment_Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PAT_MRN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FilePath)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Image_Data)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Consent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Appointment_Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PAT_MRN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FilePath)
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "Delete", new { id=item.Image_Id })
+        </td>
+    </tr>
+}
+
+</table>
