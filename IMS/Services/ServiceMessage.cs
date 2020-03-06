@@ -7,7 +7,7 @@ namespace IMS.Services
 {
     public class ServiceMessage<T>
     {
-        public IEnumerable<T> Data { get; set; }
+        public T Data { get; set; }
         public bool IsSuccessful { get; set; }
         public string ErrorMessage { get; set; }
     }

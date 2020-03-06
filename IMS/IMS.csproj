@@ -135,6 +135,14 @@
     <Compile Include="Migrations\202002191714189_initial.designer.cs">
       <DependentUpon>202002191714189_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002271754247_added ecnounter.cs" />
+    <Compile Include="Migrations\202002271754247_added ecnounter.designer.cs">
+      <DependentUpon>202002271754247_added ecnounter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002271839303_updat columns encounters.cs" />
+    <Compile Include="Migrations\202002271839303_updat columns encounters.designer.cs">
+      <DependentUpon>202002271839303_updat columns encounters.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseConnection.cs" />
     <Compile Include="Models\Encounter.cs" />
@@ -142,6 +150,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ImageUtility.cs" />
     <Compile Include="Services\ServiceMessage.cs" />
+    <Compile Include="ViewModels\CreateVM.cs" />
     <Compile Include="ViewModels\EncounterImageVM.cs" />
     <Compile Include="ViewModels\IndexVM.cs" />
   </ItemGroup>
@@ -201,6 +210,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202002191714189_initial.resx">
       <DependentUpon>202002191714189_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002271754247_added ecnounter.resx">
+      <DependentUpon>202002271754247_added ecnounter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002271839303_updat columns encounters.resx">
+      <DependentUpon>202002271839303_updat columns encounters.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

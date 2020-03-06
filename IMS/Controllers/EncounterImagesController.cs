@@ -8,66 +8,56 @@ using System.Web;
 using System.Web.Mvc;
 using IMS.Models;
 using IMS.Services;
+using IMS.ViewModels;
 
 namespace IMS.Controllers
 {
     public class EncounterImagesController : Controller
     {
-        private ImageUtility ServiceCall = new ImageUtility();
-        // The db Connection will be moved to the Service folder
-        private DatabaseConnection db = new DatabaseConnection();
+        private readonly ImageUtility ServiceCall = new ImageUtility();
 
-        // GET: EncounterImages
         public ActionResult Index()
         {
-            return View(db.EImage.ToList());
+            var vm = ServiceCall.getAll();
+            return View(vm);
         }
 
         public ActionResult Create()
         {
-            return View();
+            var vm = new CreateVM();
+            return View(vm);
         }
 
-        // POST: EncounterImages/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(EncounterImage encounterImage)
+        public ActionResult Create(CreateVM createVM)
         {
             if (ModelState.IsValid)
             {
-                db.EImage.Add(encounterImage);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                ServiceCall.AddImage(createVM);
             }
-
-            return View(encounterImage);
+            return RedirectToAction("Index");
         }
 
-        // GET: EncounterImages/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EncounterImage encounterImage = db.EImage.Find(id);
-            if (encounterImage == null)
+            var vm = ServiceCall.FindImage(id);
+            if (vm.Data == null)
             {
                 return HttpNotFound();
             }
-            return View(encounterImage);
+            return View(vm.Data);
         }
 
-        // POST: EncounterImages/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            EncounterImage encounterImage = db.EImage.Find(id);
-            db.EImage.Remove(encounterImage);
-            db.SaveChanges();
+            ServiceCall.DeleteImage(id);
             return RedirectToAction("Index");
         }
 
@@ -75,7 +65,7 @@ namespace IMS.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                ServiceCall.Dispose();
             }
             base.Dispose(disposing);
         }
