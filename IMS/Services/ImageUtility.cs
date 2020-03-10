@@ -16,6 +16,7 @@ namespace IMS.Services
             var response = new ServiceMessage<IEnumerable<IndexVM>>();
             try
             {
+                int test = 1;
                 var allEncounters = db.Encounters.ToList();
                 var allEncounterImages = db.EImage.ToList();
                 var result = from e in allEncounters
