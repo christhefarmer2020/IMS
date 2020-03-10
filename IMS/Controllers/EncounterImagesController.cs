@@ -18,8 +18,9 @@ namespace IMS.Controllers
 
         public ActionResult Index()
         {
-            var vm = ServiceCall.getAll();
-            return View(vm);
+            var response = ServiceCall.getAll();
+            IEnumerable<IndexVM> IndexVM = response.Data;
+            return View(IndexVM);
         }
 
         public ActionResult Create()

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<IMS.Models.EncounterImage>
+﻿@model IEnumerable<IMS.ViewModels.IndexVM>
 
 @{
     ViewBag.Title = "Index";
@@ -12,44 +12,76 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Image_Data)
+            @Html.DisplayNameFor(model => model.PAT_MRN)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Consent)
+            @Html.DisplayNameFor(model => model.Provider_1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contact_Date)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Appointment_Time)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PAT_MRN)
+            @Html.DisplayNameFor(model => model.First_Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FilePath)
+            @Html.DisplayNameFor(model => model.Last_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date_Of_Birth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Department_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Visit_Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Consent)
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Image_Data)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Consent)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Appointment_Time)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PAT_MRN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FilePath)
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "Delete", new { id=item.Image_Id })
-        </td>
-    </tr>
-}
-
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PAT_MRN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Provider_1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Contact_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Appointment_Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.First_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Last_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date_Of_Birth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Visit_Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Consent)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.PAT_MRN.ToString() + "," + item.Appointment_Time.ToString() })
+                </td>
+            </tr>
+        }
+    }
 </table>
