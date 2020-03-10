@@ -39,7 +39,7 @@ namespace IMS.Services
                              };
                 response.Data = result;
                 response.IsSuccessful = true;
-                int a = 1;
+                int a = 3;
             }
             catch(Exception ex)
             {
