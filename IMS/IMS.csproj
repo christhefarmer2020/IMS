@@ -143,6 +143,10 @@
     <Compile Include="Migrations\202002271839303_updat columns encounters.designer.cs">
       <DependentUpon>202002271839303_updat columns encounters.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003112025097_databaseupdate123.cs" />
+    <Compile Include="Migrations\202003112025097_databaseupdate123.designer.cs">
+      <DependentUpon>202003112025097_databaseupdate123.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DatabaseConnection.cs" />
     <Compile Include="Models\Encounter.cs" />
@@ -216,6 +220,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002271839303_updat columns encounters.resx">
       <DependentUpon>202002271839303_updat columns encounters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003112025097_databaseupdate123.resx">
+      <DependentUpon>202003112025097_databaseupdate123.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

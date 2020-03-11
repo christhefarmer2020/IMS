@@ -16,28 +16,28 @@ namespace IMS.Services
             var response = new ServiceMessage<IEnumerable<IndexVM>>();
             try
             {
-                int test = 1;
                 var allEncounters = db.Encounters.ToList();
                 var allEncounterImages = db.EImage.ToList();
                 var result = from e in allEncounters
                              join x in allEncounterImages on e.PAT_MRN_ID equals x.PAT_MRN
                              select new IndexVM
                              {
-                                 PAT_MRN = e?.PAT_MRN_ID,
-                                 Provider_1 = e?.Provider_1,
-                                 Provider_2 = e?.Provider_2,
-                                 Provider_3 = e?.Provider_3,
-                                 Provider_4 = e?.Provider_4,
-                                 Contact_Date = e?.Contact_Date,
-                                 Appointment_Time = e?.Appointment_Time,
-                                 First_Name = e?.First_Name,
-                                 Last_Name = e?.Last_Name,
-                                 Date_Of_Birth = e?.Date_Of_Birth,
-                                 Department_Name = e?.Department_Name,
-                                 Visit_Type = e?.Visit_Type,
+                                 PAT_MRN = e.PAT_MRN_ID,
+                                 Provider_1 = e.Provider_1,
+                                 Provider_2 = e.Provider_2,
+                                 Provider_3 = e.Provider_3,
+                                 Provider_4 = e.Provider_4,
+                                 Contact_Date = e.Contact_Date,
+                                 Appointment_Time = e.Appointment_Time,
+                                 First_Name = e.First_Name,
+                                 Last_Name = e.Last_Name,
+                                 Date_Of_Birth = e.Date_Of_Birth,
+                                 Department_Name = e.Department_Name,
+                                 Visit_Type = e.Visit_Type,
                                  Consent = x.Consent
                                  // ImageData = x.ImageData
                              };
+
                 response.Data = result;
                 response.IsSuccessful = true;
                 int a = 3;
