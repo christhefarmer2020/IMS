@@ -8,13 +8,16 @@ namespace IMS.ViewModels
 {
     public class IndexVM
     {
+        [DisplayName("MRN Number")]
         public string PAT_MRN { get; set; }
         [DisplayName("Provider")]
         public string Provider_1 { get; set; }
         public string Provider_2 { get; set; }
         public string Provider_3 { get; set; }
         public string Provider_4 { get; set; }
+        [DisplayName("Contact Date")]
         public DateTime? Contact_Date { get; set; }
+        [DisplayName("Appointment Time")]
         public DateTime? Appointment_Time { get; set; }
         [DisplayName("First Name")]
         public string First_Name { get; set; }
@@ -22,7 +25,9 @@ namespace IMS.ViewModels
         public string Last_Name { get; set; }
         [DisplayName("Date of Birth")]
         public DateTime? Date_Of_Birth { get; set; }
+        [DisplayName("Department Name")]
         public string Department_Name { get; set; }
+        [DisplayName("Visit Type")]
         public string Visit_Type { get; set; }
         public string Consent { get; set; }
         // Images

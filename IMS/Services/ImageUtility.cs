@@ -53,11 +53,9 @@ namespace IMS.Services
         {
             var response = new ServiceMessage<bool>();
 
-            // Insert Try Catch 
-                // create private save method and call it here
-                // convert the image to the correct format
-            // proper Exception handeling here
-
+            // foreach(var image in createVM.)
+            response.IsSuccessful = true;
+            response.Data = true;
             return response;
         }
 

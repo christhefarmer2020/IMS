@@ -7,5 +7,9 @@ namespace IMS.ViewModels
 {
     public class CreateVM
     {
+        public string PAT_MRN_NUM { get; set; }
+        public DateTime Appointment_Time { get; set; }
+        public string Consent { get; set; }
+        // Add Image stuff
     }
 }
