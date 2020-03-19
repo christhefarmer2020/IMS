@@ -54,7 +54,29 @@ namespace IMS.Services
         {
             var response = new ServiceMessage<bool>();
 
-            // foreach(var image in createVM.)
+            try 
+            {
+                //var byteArray = new byte[createVM.Images.ContentLength];
+                foreach (var item in createVM.Images)
+                {
+                    byte[] imageByte = new byte[item.ContentLength];
+                    item.InputStream.Read(imageByte, 0, item.ContentLength);
+                    var encounterImage = new EncounterImage();
+                    encounterImage.Appointment_Time = createVM.Appointment_Time;
+                    encounterImage.Consent = createVM.Consent.ToString();
+                    encounterImage.PAT_MRN = createVM.PAT_MRN_NUM;
+                    encounterImage.Image_Data = imageByte;
+                    db.EImage.Add(encounterImage);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccessful = false;
+                response.ErrorMessage = ex.ToString();
+            }
+
+
             response.IsSuccessful = true;
             response.Data = true;
             return response;
