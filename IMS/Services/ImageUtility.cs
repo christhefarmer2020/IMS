@@ -82,16 +82,28 @@ namespace IMS.Services
             return response;
         }
 
-        public ServiceMessage<bool> DeleteImage(int? id)
+        public ServiceMessage<bool> DeleteImage(int? image_id)
         {
             var response = new ServiceMessage<bool>();
+            try{
+                var imageObj = db.EImage.Find(image_id);
+                db.EImage.Remove(imageObj);
+
+                db.SaveChanges();
+            }
+           catch(Exception e)
+            {
+                response.ErrorMessage = e.ToString();
+            }
+            
+
             // Insert Try Catch
             // perform the delete
             // save the changes
             // The following code may be of some assistance 
-                // EncounterImage encounterImage = db.EImage.Find(id);
-                // db.EImage.Remove(encounterImage);
-                // db.SaveChanges();
+            // EncounterImage encounterImage = db.EImage.Find(id);
+            // db.EImage.Remove(encounterImage);
+            // db.SaveChanges();
             return response;
         }
 
