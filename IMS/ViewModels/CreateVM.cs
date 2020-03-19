@@ -10,6 +10,6 @@ namespace IMS.ViewModels
         public string PAT_MRN_NUM { get; set; }
         public DateTime Appointment_Time { get; set; }
         public string Consent { get; set; }
-        public string Images { get; set; }
+        public HttpPostedFileBase Images { get; set; }  
     }
 }

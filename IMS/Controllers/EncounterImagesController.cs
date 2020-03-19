@@ -36,6 +36,7 @@ namespace IMS.Controllers
             if (ModelState.IsValid)
             {
                 ServiceCall.AddImage(createVM);
+
             }
             return RedirectToAction("Index");
         }
