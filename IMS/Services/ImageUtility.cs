@@ -22,7 +22,6 @@ namespace IMS.Services
                              join x in allEncounterImages on e.PAT_MRN_ID equals x.PAT_MRN
                              select new IndexVM
                              {
-                                 image_Id = x.Image_Id,
                                  PAT_MRN = e.PAT_MRN_ID,
                                  Provider_1 = e.Provider_1,
                                  Provider_2 = e.Provider_2,
@@ -83,15 +82,9 @@ namespace IMS.Services
             return response;
         }
 
-        public ServiceMessage<bool> DeleteImage(int image_id)
+        public ServiceMessage<bool> DeleteImage(int? id)
         {
             var response = new ServiceMessage<bool>();
-
-            var test = db.EImage.Find(image_id);
-            db.EImage.Remove(test);
-            db.SaveChanges();
-
-
             // Insert Try Catch
             // perform the delete
             // save the changes
@@ -104,7 +97,7 @@ namespace IMS.Services
 
         public ServiceMessage<EncounterImage> FindImage(int? id){
             var response = new ServiceMessage<EncounterImage>();
-
+            
             return response;
         }
         public void Dispose()

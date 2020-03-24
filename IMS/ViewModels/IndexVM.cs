@@ -8,7 +8,6 @@ namespace IMS.ViewModels
 {
     public class IndexVM
     {
-        public int image_Id { get; set; }
         [DisplayName("MRN Number")]
         public string PAT_MRN { get; set; }
         [DisplayName("Provider")]
