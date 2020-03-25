@@ -34,13 +34,12 @@ namespace IMS.Services
                                  Date_Of_Birth = e.Date_Of_Birth,
                                  Department_Name = e.Department_Name,
                                  Visit_Type = e.Visit_Type,
-                                 Consent = x.Consent
-                                 // ImageData = x.ImageData
+                                 Consent = x.Consent,
+                                 ImageData = x.Image_Data
                              };
 
                 response.Data = result;
                 response.IsSuccessful = true;
-                int a = 3;
             }
             catch(Exception ex)
             {

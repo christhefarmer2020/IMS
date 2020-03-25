@@ -30,6 +30,6 @@ namespace IMS.ViewModels
         [DisplayName("Visit Type")]
         public string Visit_Type { get; set; }
         public string Consent { get; set; }
-        // Images
+        public byte[] ImageData { get; set; }
     }
 }

@@ -13,6 +13,9 @@
     <table class="table table-striped table-dark table-sm">
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.ImageData)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.PAT_MRN)
             </th>
             <th>
@@ -48,41 +51,48 @@
         {
             foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PAT_MRN)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Provider_1)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Contact_Date)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Appointment_Time)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.First_Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Last_Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Date_Of_Birth)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Department_Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Visit_Type)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Consent)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Delete", "Delete", new { id = item.PAT_MRN.ToString() + "," + item.Appointment_Time.ToString() })
-                    </td>
-                </tr>
+    <tr>
+        <td>
+            @{ 
+                string imreBase64Data = Convert.ToBase64String(item.ImageData);
+                string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
+            }
+            <img src="@imgDataURL" width="150" height="150"/>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PAT_MRN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Provider_1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contact_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Appointment_Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.First_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Last_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date_Of_Birth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Department_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Visit_Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Consent)
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "Delete", new { id = item.PAT_MRN.ToString() + "," + item.Appointment_Time.ToString() })
+        </td>
+    </tr>
             }
         }
     </table>
