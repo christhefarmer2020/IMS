@@ -53,11 +53,13 @@
             {
     <tr>
         <td>
-            @{ 
+            @{
                 string imreBase64Data = Convert.ToBase64String(item.ImageData);
                 string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
             }
-            <img src="@imgDataURL" width="150" height="150"/>
+            <a download="test.jpg" href="@imgDataURL" title="Encounter Image">
+                <img src="@imgDataURL" width="150" height="150" />
+            </a>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PAT_MRN)
