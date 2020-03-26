@@ -12,7 +12,12 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Image_Data)
+            @{
+                string imreBase64Data = Convert.ToBase64String(Model.Image_Data);
+                string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
+            }
+            <img src="@imgDataURL" width="150" height="150" />
+            
         </dt>
 
         <dd>

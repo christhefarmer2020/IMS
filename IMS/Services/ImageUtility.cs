@@ -22,6 +22,7 @@ namespace IMS.Services
                              join x in allEncounterImages on e.PAT_MRN_ID equals x.PAT_MRN
                              select new IndexVM
                              {
+                                 image_id = x.Image_Id,
                                  PAT_MRN = e.PAT_MRN_ID,
                                  Provider_1 = e.Provider_1,
                                  Provider_2 = e.Provider_2,
@@ -106,10 +107,12 @@ namespace IMS.Services
             return response;
         }
 
-        public ServiceMessage<EncounterImage> FindImage(int? id){
+        public EncounterImage FindImage(int? id){
             var response = new ServiceMessage<EncounterImage>();
-            
-            return response;
+            var imageObj = db.EImage.Find(id);
+            response.Data = imageObj;
+
+            return imageObj;
         }
         public void Dispose()
         {

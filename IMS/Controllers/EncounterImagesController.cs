@@ -48,11 +48,11 @@ namespace IMS.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var vm = ServiceCall.FindImage(id);
-            if (vm.Data == null)
+            if (vm == null)
             {
                 return HttpNotFound();
             }
-            return View(vm.Data);
+            return View(vm);
         }
 
         [HttpPost, ActionName("Delete")]
