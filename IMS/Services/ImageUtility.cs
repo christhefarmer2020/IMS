@@ -47,13 +47,11 @@ namespace IMS.Services
                 response.IsSuccessful = false;
                 response.ErrorMessage = ex.ToString();
             }
-
             return response;
         }
         public ServiceMessage<bool> AddImage(CreateVM createVM)
         {
             var response = new ServiceMessage<bool>();
-
             try 
             {
                 //var byteArray = new byte[createVM.Images.ContentLength];
@@ -75,8 +73,6 @@ namespace IMS.Services
                 response.IsSuccessful = false;
                 response.ErrorMessage = ex.ToString();
             }
-
-
             response.IsSuccessful = true;
             response.Data = true;
             return response;
@@ -85,25 +81,18 @@ namespace IMS.Services
         public ServiceMessage<bool> DeleteImage(int? image_id)
         {
             var response = new ServiceMessage<bool>();
-            try{
+            try
+            {
                 var imageObj = db.EImage.Find(image_id);
                 db.EImage.Remove(imageObj);
-
                 db.SaveChanges();
+                response.IsSuccessful = true;
             }
            catch(Exception e)
             {
+                response.IsSuccessful = false;
                 response.ErrorMessage = e.ToString();
             }
-            
-
-            // Insert Try Catch
-            // perform the delete
-            // save the changes
-            // The following code may be of some assistance 
-            // EncounterImage encounterImage = db.EImage.Find(id);
-            // db.EImage.Remove(encounterImage);
-            // db.SaveChanges();
             return response;
         }
 
@@ -111,18 +100,11 @@ namespace IMS.Services
             var response = new ServiceMessage<EncounterImage>();
             var imageObj = db.EImage.Find(id);
             response.Data = imageObj;
-
             return imageObj;
         }
         public void Dispose()
         {
             db.Dispose();
-        }
-        private bool SaveToDatabase()
-        {
-            return false;
-        }
-
-        
+        } 
     }
 }
