@@ -2,7 +2,36 @@
 @{
     ViewBag.Title = "Index";
 }
-
+@{
+    if (ViewBag.CreateAlert == "True")
+    {
+        <div class="alert alert-success alert-dismissible fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong> The image was successfully saved!
+        </div>
+    }
+    if (ViewBag.CreateAlert == "False")
+    {
+        <div class="alert alert-danger alert-dismissible fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Warning!</strong> There is an error and the image was not saved. Please try again!
+        </div>
+    }
+    if (ViewBag.DeleteAlert == "True")
+    {
+        <div class="alert alert-success alert-dismissible fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong> The image was successfully deleted.
+        </div>
+    }
+    if (ViewBag.DeleteAlert == "False")
+    {
+        <div class="alert alert-danger alert-dismissible fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Warning!</strong> The image was not deleted. Please try again!
+        </div>
+    }
+}
 <h2>Index</h2>
 
 <style>
@@ -20,6 +49,22 @@
 
     .myactionlink {
         background-color: forestgreen
+    }
+
+    .myactionlink {
+        padding-left: 5px
+    }
+
+    .myactionlink {
+        padding-right: 5px
+    }
+
+    .myactionlink {
+        padding-top: 5px
+    }
+
+    .myactionlink {
+        padding-bottom: 5px
     }
 </style>
 

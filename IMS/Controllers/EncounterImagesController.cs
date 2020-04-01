@@ -14,12 +14,19 @@ namespace IMS.Controllers
 {
     public class EncounterImagesController : Controller
     {
+        private static string createAlert = "";
+        public static string deleteAlert = "";
+
         private readonly ImageUtility ServiceCall = new ImageUtility();
 
         public ActionResult Index()
         {
             var response = ServiceCall.getAll();
             IEnumerable<IndexVM> IndexVM = response.Data;
+            ViewBag.CreateAlert = createAlert;
+            createAlert = "";
+            ViewBag.DeleteAlert = deleteAlert;
+            deleteAlert = "";
             return View(IndexVM);
         }
 
@@ -35,8 +42,8 @@ namespace IMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                ServiceCall.AddImage(createVM);
-
+                var response = ServiceCall.AddImage(createVM);
+                createAlert = response.IsSuccessful.ToString();
             }
             return RedirectToAction("Index");
         }
@@ -59,7 +66,8 @@ namespace IMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ServiceCall.DeleteImage(id);
+            var response = ServiceCall.DeleteImage(id);
+            deleteAlert = response.IsSuccessful.ToString();
             return RedirectToAction("Index");
         }
 
