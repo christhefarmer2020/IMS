@@ -6,6 +6,40 @@
 
 <h2>Create</h2>
 
+<style>
+    .myactionlink:hover {
+        color: black;
+    }
+
+    .myactionlink {
+        color: white;
+    }
+
+    .myactionlink {
+        border: double
+    }
+
+    .myactionlink {
+        background-color: forestgreen
+    }
+
+    .myactionlink {
+        padding-left: 5px
+    }
+
+    .myactionlink {
+        padding-right: 5px
+    }
+
+    .myactionlink {
+        padding-top: 5px
+    }
+
+    .myactionlink {
+        padding-bottom: 5px
+    }
+</style>
+
 
 @using (Html.BeginForm("Create","EncounterImages", FormMethod.Post, new { enctype="multipart/form-data"}))
 {
@@ -57,7 +91,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", "EncounterImages", new { @class = "myactionlink" })
 </div>
 
 @section Scripts {
