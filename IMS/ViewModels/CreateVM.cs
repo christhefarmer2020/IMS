@@ -14,7 +14,9 @@ namespace IMS.ViewModels
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Appointment_Time { get; set; }
-
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string DOB { get; set; }
         public string Consent { get; set; }
 
         public List<HttpPostedFileBase> Images { get; set; }  
