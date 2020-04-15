@@ -18,28 +18,50 @@ namespace IMS.Services
             {
                 var allEncounters = db.Encounters.ToList();
                 var allEncounterImages = db.EImage.ToList();
-                var result = from e in allEncounters
-                             join x in allEncounterImages on e.PAT_MRN_ID equals x.PAT_MRN
-                             select new IndexVM
-                             {
-                                 image_id = x.Image_Id,
-                                 PAT_MRN = e.PAT_MRN_ID,
-                                 Provider_1 = e.Provider_1,
-                                 Provider_2 = e.Provider_2,
-                                 Provider_3 = e.Provider_3,
-                                 Provider_4 = e.Provider_4,
-                                 Contact_Date = e.Contact_Date,
-                                 Appointment_Time = e.Appointment_Time,
-                                 First_Name = e.First_Name,
-                                 Last_Name = e.Last_Name,
-                                 Date_Of_Birth = e.Date_Of_Birth,
-                                 Department_Name = e.Department_Name,
-                                 Visit_Type = e.Visit_Type,
-                                 Consent = x.Consent,
-                                 ImageData = x.Image_Data
-                             };
+                var result1 = from imageTable in allEncounterImages
+                              join encounters in allEncounters on imageTable.PAT_MRN equals encounters.PAT_MRN_ID into joinedList
+                              from joined in joinedList.DefaultIfEmpty()
+                              select new IndexVM
+                              {
+                                  image_id = imageTable.Image_Id,
+                                  PAT_MRN = imageTable.PAT_MRN,
+                                  Provider_1 = joined?.Provider_1,
+                                  Provider_2 = joined?.Provider_2,
+                                  Provider_3 = joined?.Provider_3,
+                                  Provider_4 = joined?.Provider_4,
+                                  Contact_Date = imageTable.Appointment_Time,
+                                  First_Name = joined?.First_Name,
+                                  Last_Name = joined?.Last_Name,
+                                  Date_Of_Birth = joined?.Date_Of_Birth,
+                                  Department_Name = joined?.Department_Name,
+                                  Visit_Type = joined?.Visit_Type,
+                                  Consent = imageTable.Consent,
+                                  ImageData = imageTable.Image_Data,
+                                  Gender = joined?.Gender
+                              };
+                //var result = from e in allEncounters
+                //             join x in allEncounterImages on e.PAT_MRN_ID equals x.PAT_MRN into j
+                //             from x in j.DefaultIfEmpty()
+                //             select new IndexVM
+                //             {
+                //                 image_id = x.Image_Id,
+                //                 PAT_MRN = e.PAT_MRN_ID,
+                //                 Provider_1 = e.Provider_1,
+                //                 Provider_2 = e.Provider_2,
+                //                 Provider_3 = e.Provider_3,
+                //                 Provider_4 = e.Provider_4,
+                //                 Contact_Date = e.Contact_Date,
+                //                 Appointment_Time = e.Appointment_Time,
+                //                 First_Name = e.First_Name,
+                //                 Last_Name = e.Last_Name,
+                //                 Date_Of_Birth = e.Date_Of_Birth,
+                //                 Department_Name = e.Department_Name,
+                //                 Visit_Type = e.Visit_Type,
+                //                 Consent = x.Consent,
+                //                 ImageData = x.Image_Data
+                //             };
 
-                response.Data = result;
+                response.Data = result1;
                 response.IsSuccessful = true;
             }
             catch(Exception ex)
