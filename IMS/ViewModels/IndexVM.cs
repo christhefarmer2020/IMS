@@ -12,10 +12,7 @@ namespace IMS.ViewModels
         [DisplayName("MRN Number")]
         public string PAT_MRN { get; set; }
         [DisplayName("Provider")]
-        public string Provider_1 { get; set; }
-        public string Provider_2 { get; set; }
-        public string Provider_3 { get; set; }
-        public string Provider_4 { get; set; }
+        public string Providers { get; set; }
         [DisplayName("Contact Date")]
         public DateTime? Contact_Date { get; set; }
         [DisplayName("Appointment Time")]

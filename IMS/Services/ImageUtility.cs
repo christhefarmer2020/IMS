@@ -25,10 +25,7 @@ namespace IMS.Services
                               {
                                   image_id = imageTable.Image_Id,
                                   PAT_MRN = imageTable.PAT_MRN,
-                                  Provider_1 = joined?.Provider_1,
-                                  Provider_2 = joined?.Provider_2,
-                                  Provider_3 = joined?.Provider_3,
-                                  Provider_4 = joined?.Provider_4,
+                                  Providers = joined?.Provider_1 + ", " + joined?.Provider_2 + ", " + joined?.Provider_3 + " , " + joined?.Provider_4,
                                   Contact_Date = imageTable.Appointment_Time,
                                   First_Name = joined?.First_Name,
                                   Last_Name = joined?.Last_Name,
