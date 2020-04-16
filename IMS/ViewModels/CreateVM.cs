@@ -16,11 +16,18 @@ namespace IMS.ViewModels
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required]
-
         public DateTime Appointment_Time { get; set; }
+
+        [Required]
         public string FirstName { get; set; }
+
+        [Required]
         public string LastName { get; set; }
+
+        [Required]
         public string DOB { get; set; }
+
+        [Required]
         public string Consent { get; set; }
         
         [FileExtensions(Extensions = "JPEG,JPG,PNG,GIF,TIFF")]
