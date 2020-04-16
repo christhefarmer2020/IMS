@@ -18,8 +18,9 @@ namespace IMS.ViewModels
         [Required]
 
         public DateTime Appointment_Time { get; set; }
-
-        [Required]
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string DOB { get; set; }
         public string Consent { get; set; }
         
         [FileExtensions(Extensions = "JPEG,JPG,PNG,GIF,TIFF")]
