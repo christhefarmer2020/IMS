@@ -15,7 +15,8 @@ namespace IMS
                         "~/Scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/dataTables").Include(
-                        "~/Scripts/DataTables/jquery.dataTables.js", "~/Scripts/flatpickr.js"));
+                        "~/Scripts/DataTables/jquery.dataTables.min.js", "~/Scripts/flatpickr.js","~/Scripts/buttons.colVis.min.js",
+                        "~/Scripts/dataTables.buttons.min.js"));
 
             bundles.Add(new StyleBundle("~/bundles/dataTablesStyles").Include(
                         "~/Content/DataTables/css/jquery.dataTables.css", "~/Content/flatpickr.min.css"));

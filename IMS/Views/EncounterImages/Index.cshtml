@@ -32,7 +32,7 @@
         </div>
     }
 }
-<h2>Index</h2>
+<h2></h2>
 
 <style>
     .myactionlink:hover {
@@ -69,7 +69,7 @@
 </style>
 
 <p>
-    @Html.ActionLink(" Create New ", "Create", "EncounterImages", new { @class = "myactionlink" })
+    @Html.ActionLink(" Upload Image(s) ", "Create", "EncounterImages", new { @class = "myactionlink" })
 
 </p>
 <!--<script src="jquery-3.4.1.js"></script>-->
@@ -143,7 +143,7 @@
                 this.api().columns('.daterange-filter').every(function () {
                     var column = this;
                     var target = table.aoHeader[1][column.index()].cell;
-                    var div = $('<div class="input-group-sm" style="margin:0 !important; min-width:230px !important; width:100%;"><div class="input-group-append"></div></div>').appendTo(target);
+                    var div = $('<div class="input-group-sm" style="margin:0 !important; min-width:150px !important; width:100%;"><div class="input-group-append"></div></div>').appendTo(target);
 
                     var datepicker = $('<input placeholder="Date Range Filter" class="dt-rg-picker form-control"/>').prependTo(div).flatpickr({
                         mode: "range",
@@ -239,7 +239,7 @@
                                 string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
                             }
                             <a download="test.jpg" href="@imgDataURL" title="Encounter Image">
-                                <img src="@imgDataURL" width="100" height="100" />
+                                <img src="@imgDataURL" width="75" height="75" />
                             </a>
                         </td>
                         <td>
