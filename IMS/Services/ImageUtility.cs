@@ -59,7 +59,7 @@ namespace IMS.Services
                     byte[] imageByte = new byte[item.ContentLength];
                     item.InputStream.Read(imageByte, 0, item.ContentLength);
                     string consent = createVM.Consent.ToString();
-
+                    string MRN = db.Encounters.Where(x => x.First_Name == createVM.FirstName && x.Last_Name == createVM.LastName && x.Date_Of_Birth.ToString() == createVM.DOB && x.Contact_Date.ToString() == createVM.Appointment_Time).Select(x => x.PAT_MRN_ID).FirstOrDefault();
                     string DOV = createVM.Appointment_Time.ToString().Replace('/', '.');
                     DOV = DOV.Substring(0, DOV.IndexOf(" "));
                     //string saveTo = CreateFolders(createVM);
