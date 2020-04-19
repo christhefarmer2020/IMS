@@ -57,10 +57,11 @@ namespace IMS.Services
                 {
                     byte[] imageByte = new byte[item.ContentLength];
                     item.InputStream.Read(imageByte, 0, item.ContentLength);
+                    var MRN = db.Encounters.Where(x => x.First_Name == createVM.FirstName && x.Last_Name == createVM.LastName && x.Contact_Date == x.Appointment_Time).Select(x=>x.PAT_MRN_ID).FirstOrDefault();
                     var encounterImage = new EncounterImage();
                     encounterImage.Appointment_Time = DateTime.Parse(createVM.Appointment_Time);
                     encounterImage.Consent = createVM.Consent.ToString();
-                    encounterImage.PAT_MRN = createVM.PAT_MRN_NUM;
+                    encounterImage.PAT_MRN = MRN;
                     encounterImage.Image_Data = imageByte;
                     db.EImage.Add(encounterImage);
                     db.SaveChanges();
