@@ -52,6 +52,7 @@ namespace IMS.Services
         public ServiceMessage<bool> AddImage(CreateVM createVM)
         {
             var response = new ServiceMessage<bool>();
+            int counter = 1;
             try 
             {
                 foreach (var item in createVM.Images)
@@ -60,13 +61,12 @@ namespace IMS.Services
                     item.InputStream.Read(imageByte, 0, item.ContentLength);
                     string consent = createVM.Consent.ToString();
                     string MRN = db.Encounters.Where(x => x.First_Name == createVM.FirstName && x.Last_Name == createVM.LastName && x.Date_Of_Birth.ToString() == createVM.DOB && x.Contact_Date.ToString() == createVM.Appointment_Time).Select(x => x.PAT_MRN_ID).FirstOrDefault();
-                    string DOV = createVM.Appointment_Time.ToString().Replace('/', '.');
-                    DOV = DOV.Substring(0, DOV.IndexOf(" "));
-                    //string saveTo = CreateFolders(createVM);
-                    string saveTo = CreateFolders(createVM.LastName.ToString() + ", " + createVM.FirstName.ToString() + " DOV " + DOV + ".jpeg", createVM);
-                    //string saveTo = CreateFolders(createVM.LastName.ToString() + ", " + createVM.FirstName.ToString() + " DOV " + DOV);
-                    //CreateFolders("Last, First DOV 4.8.2020");
+                    //create DOV for file name
+                    string DOV = createVM.Appointment_Time.ToString().Replace('-', '.');
+                    //adding name and DOV for the file extension
+                    string saveTo = CreateFolders(createVM.LastName.ToString() + ", " + createVM.FirstName.ToString() + " DOV " + DOV + " (" +counter.ToString() + ")" + ".jpeg", createVM);                    
                     FileStream writeStream = new FileStream(saveTo, FileMode.Create, FileAccess.Write);
+                    counter++;
                     writeStream.Write(imageByte, 0, item.ContentLength);
                     writeStream.Close();
 
@@ -94,14 +94,9 @@ namespace IMS.Services
             // Specify a name for your top-level folder.
             string folderName= System.Configuration.ConfigurationManager.AppSettings["source"];
 
-            //string folderName = "c://Users//Ryan//Desktop//";
-            //string folderName = ConfigurationManager.AppSettings["filePath"].ToString();
-            //string folderName = System.Web.Configuration.WebConfigurationManager.AppSettings["filePath"].ToString();
-
             // To create a string that specifies the path to a subfolder under your 
             // top-level folder, add a name for the subfolder to folderName.
-            string DOB = createVM.DOB.ToString().Replace('/', '.');
-            DOB = DOB.Substring(0, DOB.IndexOf(" "));
+            string DOB = createVM.DOB.ToString().Replace('-', '.');
             string pathString = System.IO.Path.Combine(folderName, createVM.LastName.ToString() + ", " + createVM.FirstName.ToString() + " DOB " + DOB);
 
             // Create the subfolder. You can verify in File Explorer that you have this
@@ -134,7 +129,6 @@ namespace IMS.Services
             else
             {
                 Console.WriteLine("File \"{0}\" already exists.", FileName);
-                //return;
             }
 
             // Read and display the data from your file.
