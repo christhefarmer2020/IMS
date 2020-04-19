@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2></h2>
 
 <style>
     .myactionlink:hover {
@@ -96,14 +96,14 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Images, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.Images, new { type = "file", multiple = "multiple" })
+            @Html.TextBoxFor(model => model.Images, new { type = "file", multiple = "multiple", accept=".png,.jpeg,.jpg"})
             @Html.ValidationMessageFor(model => model.Images, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-success" /> |
+            <input type="submit" value="Upload" class="btn btn-success" /> |
             @Html.ActionLink("Back to List", "Index", "EncounterImages", new { @class = "btn btn-primary" })
         </div>
     </div>

@@ -38,45 +38,18 @@
     }
 </style>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Are you sure you want to delete this image?</h3>
 <div>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal-lg">
+        
         <dt>
-            @Html.DisplayNameFor(model => model.PAT_MRN)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PAT_MRN)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Image_Data)
-        </dt>
-        <dd>
             @{
                 string imreBase64Data = Convert.ToBase64String(Model.Image_Data);
                 string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
             }
-            <img src="@imgDataURL" width="150" height="150" />
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Consent)
+            <img src="@imgDataURL" width="250" height="250" />
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Consent)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Appointment_Time)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Appointment_Time)
-        </dd>
-
-
 
     </dl>
 
