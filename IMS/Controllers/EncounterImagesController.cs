@@ -40,11 +40,8 @@ namespace IMS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateVM createVM)
         {
-            if (ModelState.IsValid)
-            {
-                var response = ServiceCall.AddImage(createVM);
-                createAlert = response.IsSuccessful.ToString();
-            }
+            var response = ServiceCall.AddImage(createVM);
+            createAlert = response.IsSuccessful.ToString();
             return RedirectToAction("Index");
         }
 

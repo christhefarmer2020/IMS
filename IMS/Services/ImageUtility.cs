@@ -27,7 +27,7 @@ namespace IMS.Services
                               {
                                   image_id = imageTable.Image_Id,
                                   PAT_MRN = imageTable.PAT_MRN,
-                                  Providers = joined?.Provider_1 + ", " + joined?.Provider_2 + ", " + joined?.Provider_3 + " , " + joined?.Provider_4,
+                                  Providers = joined?.Provider_1 + ", " + joined?.Provider_2 + ", " + joined?.Provider_3 + ", " + joined?.Provider_4,
                                   Contact_Date = imageTable.Appointment_Time,
                                   First_Name = joined?.First_Name,
                                   Last_Name = joined?.Last_Name,
@@ -38,27 +38,6 @@ namespace IMS.Services
                                   ImageData = imageTable.Image_Data,
                                   Gender = joined?.Gender
                               };
-                //var result = from e in allEncounters
-                //             join x in allEncounterImages on e.PAT_MRN_ID equals x.PAT_MRN into j
-                //             from x in j.DefaultIfEmpty()
-                //             select new IndexVM
-                //             {
-                //                 image_id = x.Image_Id,
-                //                 PAT_MRN = e.PAT_MRN_ID,
-                //                 Provider_1 = e.Provider_1,
-                //                 Provider_2 = e.Provider_2,
-                //                 Provider_3 = e.Provider_3,
-                //                 Provider_4 = e.Provider_4,
-                //                 Contact_Date = e.Contact_Date,
-                //                 Appointment_Time = e.Appointment_Time,
-                //                 First_Name = e.First_Name,
-                //                 Last_Name = e.Last_Name,
-                //                 Date_Of_Birth = e.Date_Of_Birth,
-                //                 Department_Name = e.Department_Name,
-                //                 Visit_Type = e.Visit_Type,
-                //                 Consent = x.Consent,
-                //                 ImageData = x.Image_Data
-                //             };
 
                 response.Data = result1;
                 response.IsSuccessful = true;
@@ -92,10 +71,10 @@ namespace IMS.Services
                     writeStream.Close();
 
                     var encounterImage = new EncounterImage();  
-                    encounterImage.Appointment_Time = createVM.Appointment_Time;
+                    encounterImage.Appointment_Time = DateTime.Parse(createVM.Appointment_Time);
                     encounterImage.Consent = createVM.Consent.ToString();
-                    encounterImage.PAT_MRN = createVM.PAT_MRN_NUM;
-                    encounterImage.Image_Data = imageByte;                    
+                    encounterImage.PAT_MRN = MRN;
+                    encounterImage.Image_Data = imageByte;
                     db.EImage.Add(encounterImage);
                     db.SaveChanges();
                 }
