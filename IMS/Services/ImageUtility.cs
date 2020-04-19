@@ -2,6 +2,8 @@
 using IMS.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -52,13 +54,23 @@ namespace IMS.Services
             var response = new ServiceMessage<bool>();
             try 
             {
-                //var byteArray = new byte[createVM.Images.ContentLength];
                 foreach (var item in createVM.Images)
                 {
                     byte[] imageByte = new byte[item.ContentLength];
                     item.InputStream.Read(imageByte, 0, item.ContentLength);
-                    var MRN = db.Encounters.Where(x => x.First_Name == createVM.FirstName && x.Last_Name == createVM.LastName && x.Contact_Date == x.Appointment_Time).Select(x=>x.PAT_MRN_ID).FirstOrDefault();
-                    var encounterImage = new EncounterImage();
+                    string consent = createVM.Consent.ToString();
+
+                    string DOV = createVM.Appointment_Time.ToString().Replace('/', '.');
+                    DOV = DOV.Substring(0, DOV.IndexOf(" "));
+                    //string saveTo = CreateFolders(createVM);
+                    string saveTo = CreateFolders(createVM.LastName.ToString() + ", " + createVM.FirstName.ToString() + " DOV " + DOV + ".jpeg", createVM);
+                    //string saveTo = CreateFolders(createVM.LastName.ToString() + ", " + createVM.FirstName.ToString() + " DOV " + DOV);
+                    //CreateFolders("Last, First DOV 4.8.2020");
+                    FileStream writeStream = new FileStream(saveTo, FileMode.Create, FileAccess.Write);
+                    writeStream.Write(imageByte, 0, item.ContentLength);
+                    writeStream.Close();
+
+                    var encounterImage = new EncounterImage();  
                     encounterImage.Appointment_Time = DateTime.Parse(createVM.Appointment_Time);
                     encounterImage.Consent = createVM.Consent.ToString();
                     encounterImage.PAT_MRN = MRN;
@@ -76,7 +88,72 @@ namespace IMS.Services
             response.Data = true;
             return response;
         }
+        
+        private string CreateFolders(string FileName, CreateVM createVM)
+        {
+            // Specify a name for your top-level folder.
+            string folderName= System.Configuration.ConfigurationManager.AppSettings["source"];
 
+            //string folderName = "c://Users//Ryan//Desktop//";
+            //string folderName = ConfigurationManager.AppSettings["filePath"].ToString();
+            //string folderName = System.Web.Configuration.WebConfigurationManager.AppSettings["filePath"].ToString();
+
+            // To create a string that specifies the path to a subfolder under your 
+            // top-level folder, add a name for the subfolder to folderName.
+            string DOB = createVM.DOB.ToString().Replace('/', '.');
+            DOB = DOB.Substring(0, DOB.IndexOf(" "));
+            string pathString = System.IO.Path.Combine(folderName, createVM.LastName.ToString() + ", " + createVM.FirstName.ToString() + " DOB " + DOB);
+
+            // Create the subfolder. You can verify in File Explorer that you have this
+            // structure in the C: drive.
+            //    Local Disk (C:)
+            //        folderName
+            //            pathString
+            System.IO.Directory.CreateDirectory(pathString);
+
+            // Use Combine again to add the file name to the path.
+            pathString = System.IO.Path.Combine(pathString, FileName);
+
+            // Verify the path that you have constructed.
+            Console.WriteLine("Path to my file: {0}\n", pathString);
+
+            // Check that the file doesn't already exist. If it doesn't exist, create
+            // the file and write integers 0 - 99 to it.
+            // DANGER: System.IO.File.Create will overwrite the file if it already exists.
+            // This could happen even with random file names, although it is unlikely.
+            if (!System.IO.File.Exists(pathString))
+            {
+                using (System.IO.FileStream fs = System.IO.File.Create(pathString))
+                {
+                    for (byte i = 0; i < 100; i++)
+                    {
+                        fs.WriteByte(i);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("File \"{0}\" already exists.", FileName);
+                //return;
+            }
+
+            // Read and display the data from your file.
+            try
+            {
+                byte[] readBuffer = System.IO.File.ReadAllBytes(pathString);
+                foreach (byte b in readBuffer)
+                {
+                    Console.Write(b + " ");
+                }
+                Console.WriteLine();
+            }
+            catch (System.IO.IOException e)
+            {
+                Console.WriteLine(e.Message);
+            }            
+
+            return pathString;
+        }
         public ServiceMessage<bool> DeleteImage(int? image_id)
         {
             var response = new ServiceMessage<bool>();

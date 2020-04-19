@@ -83,11 +83,13 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Consent, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("Consent", new List<SelectListItem>
-            {
-                new SelectListItem { Text = "Present", Value = "Present" },
-                new SelectListItem { Text = "Publish", Value = "Publish" }
-            }, "Consent Status")
+           
+
+            <select name="Consent" size="4" multiple="multiple" style="width:200px">
+                <option value="Present">Present</option>
+                <option value="Publish">Publish</option>
+                <option value="Face To Gene">Face To Gene</option>
+            </select>
 
             @Html.ValidationMessageFor(model => model.Consent, "", new { @class = "text-danger" })
         </div>
