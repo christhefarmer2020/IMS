@@ -1,0 +1,98 @@
+﻿@model IEnumerable<IMS.ViewModels.searchEncounterVM>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div>
+        <!-- <table class="table table-striped table-dark table-sm">-->
+        <button onclick="location.href='@Url.Action("Index", "EncounterImages")'" class="btn btn-warning">Back</button>
+        <button onclick="location.href='@Url.Action("Create", "EncounterImages")'" class="btn btn-primary">Upload without Encounter</button>
+        <h2></h2>
+        <table id="myTable" class="table table-responsive" width="110%">
+            <thead>
+                <tr>
+                    <th class="search-filter">
+                        @Html.DisplayNameFor(model => model.PAT_MRN)
+                    </th>
+                    <th class="search-filter">
+                        @Html.DisplayNameFor(model => model.Providers)
+                    </th>
+                    <th class="daterange-filter">
+                        @Html.DisplayNameFor(model => model.Contact_Date)
+                    </th>
+                    <th class="dropdown-filter">
+                        @Html.DisplayNameFor(model => model.Gender)
+                    </th>
+                    <th class="search-filter">
+                        @Html.DisplayNameFor(model => model.First_Name)
+                    </th>
+                    <th class="search-filter">
+                        @Html.DisplayNameFor(model => model.Last_Name)
+                    </th>
+                    <th class="daterange-filter">
+                        @Html.DisplayNameFor(model => model.Date_Of_Birth)
+                    </th>
+                    <th class="search-filter">
+                        @Html.DisplayNameFor(model => model.Department_Name)
+                    </th>
+                    <th class="search-filter">
+                        @Html.DisplayNameFor(model => model.Visit_Type)
+                    </th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PAT_ENC_CSN_ID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Providers)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Contact_Date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Gender)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.First_Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Last_Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date_Of_Birth)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Department_Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Visit_Type)
+                            </td>
+                            <td>
+                                <button onclick="location.href='@Url.Action("UploadTo", "EncounterImages", new { url = item.PAT_ENC_CSN_ID.ToString() })'" class="btn btn-success">Upload</button>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>

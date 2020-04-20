@@ -247,6 +247,8 @@
     <Compile Include="ViewModels\CreateVM.cs" />
     <Compile Include="ViewModels\EncounterImageVM.cs" />
     <Compile Include="ViewModels\IndexVM.cs" />
+    <Compile Include="ViewModels\searchEncounterVM.cs" />
+    <Compile Include="ViewModels\uploadVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -508,6 +510,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\mydatatablescript.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -522,6 +525,8 @@
     <Content Include="Views\EncounterImages\Create.cshtml" />
     <Content Include="Views\EncounterImages\Delete.cshtml" />
     <Content Include="Views\EncounterImages\Index.cshtml" />
+    <Content Include="Views\EncounterImages\SearchEncounter.cshtml" />
+    <Content Include="Views\EncounterImages\UploadTo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

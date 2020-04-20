@@ -29,6 +29,17 @@ namespace IMS.Controllers
             deleteAlert = "";
             return View(IndexVM);
         }
+        public ActionResult UploadTo(string url)
+        {
+            var vm = new uploadVM();
+            var response = ServiceCall.GetEcnounter(url);
+            vm.DOB = response.Date_Of_Birth.ToShortDateString();
+            vm.FirstName = response.First_Name;
+            vm.LastName = response.Last_Name;
+            vm.Appointment_Time = response.Contact_Date.ToShortDateString();
+            vm.PAT_MRN = response.PAT_MRN_ID;
+            return View(vm);
+        }
 
         public ActionResult Create()
         {
@@ -41,6 +52,14 @@ namespace IMS.Controllers
         public ActionResult Create(CreateVM createVM)
         {
             var response = ServiceCall.AddImage(createVM);
+            createAlert = response.IsSuccessful.ToString();
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Upload(CreateVM uploadVM)
+        {
+            var response = ServiceCall.AddImage(uploadVM);
             createAlert = response.IsSuccessful.ToString();
             return RedirectToAction("Index");
         }
@@ -66,6 +85,17 @@ namespace IMS.Controllers
             var response = ServiceCall.DeleteImage(id);
             deleteAlert = response.IsSuccessful.ToString();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult SearchEncounter()
+        {
+            var response = ServiceCall.getAllEncounters();
+            IEnumerable<searchEncounterVM> searchEncounterVMs = response.Data;
+            ViewBag.CreateAlert = createAlert;
+            createAlert = "";
+            ViewBag.DeleteAlert = deleteAlert;
+            deleteAlert = "";
+            return View(searchEncounterVMs);
         }
 
         protected override void Dispose(bool disposing)

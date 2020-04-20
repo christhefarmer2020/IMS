@@ -6,12 +6,10 @@ using System.Web;
 
 namespace IMS.ViewModels
 {
-    public class CreateVM
+    public class uploadVM
     {
         public string PAT_MRN { get; set; }
         [Display(Name = "Appointment Date")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required]
         public string Appointment_Time { get; set; }
 
@@ -24,8 +22,6 @@ namespace IMS.ViewModels
         public string LastName { get; set; }
 
         [Display(Name = "Date of birth")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required]
         public string DOB { get; set; }
 
@@ -34,6 +30,6 @@ namespace IMS.ViewModels
 
         [Required]
         [FileExtensions(Extensions = "JPEG,JPG,PNG", ErrorMessage = "The file type is not allowed")]
-        public List<HttpPostedFileBase> Images { get; set;}  
+        public List<HttpPostedFileBase> Images { get; set; }
     }
 }
