@@ -1,4 +1,4 @@
-﻿@model IMS.ViewModels.CreateVM
+﻿@model IMS.ViewModels.uploadVM
 
 @{
     ViewBag.Title = "Create";
@@ -41,39 +41,39 @@
 </style>
 
 
-@using (Html.BeginForm("Create","EncounterImages", FormMethod.Post, new { enctype="multipart/form-data"}))
+@using (Html.BeginForm("Upload", "EncounterImages", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
 <div class="form-horizontal">
     <h4>Upload Encounter Image(s) and Metadata</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
     <div class="form-group">
         @Html.LabelFor(model => model.PAT_MRN, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.PAT_MRN, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.PAT_MRN, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
             @Html.ValidationMessageFor(model => model.PAT_MRN, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
             @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
             @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label col-md-2 " })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
             @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -81,7 +81,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Appointment_Time, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Appointment_Time, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Appointment_Time, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
             @Html.ValidationMessageFor(model => model.Appointment_Time, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -111,10 +111,9 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Upload" class="btn btn-success" />
-            @Html.ActionLink("Back to List", "SearchEncounter", "EncounterImages", new { @class = "btn btn-warning" })
+            <input type="submit" value="Upload" class="btn btn-success" /> |
+            @Html.ActionLink("Back to Encounter List", "SearchEncounter", "EncounterImages", new { @class = "btn btn-warning" }) |
             @Html.ActionLink("Cancel", "Index", "EncounterImages", new { @class = "btn btn-danger" })
-
         </div>
     </div>
 </div>

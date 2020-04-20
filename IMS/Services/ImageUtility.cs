@@ -13,6 +13,38 @@ namespace IMS.Services
     {
         private DatabaseConnection db = new DatabaseConnection();
 
+
+        public ServiceMessage<IEnumerable<searchEncounterVM>> getAllEncounters()
+        {
+            var response = new ServiceMessage<IEnumerable<searchEncounterVM>>();
+            try
+            {
+                var allEncounters = db.Encounters.ToList();
+                var result = from all in allEncounters
+                             select new searchEncounterVM
+                             {
+                                 PAT_ENC_CSN_ID = all.PAT_ENC_CSN_ID,
+                                 PAT_MRN = all.PAT_MRN_ID,
+                                 Providers = all.Provider_1 + ", " + all.Provider_2 + ", " + all.Provider_3 + ", " + all.Provider_4,
+                                 Contact_Date = all.Contact_Date,
+                                 First_Name = all.First_Name,
+                                 Last_Name = all.Last_Name,
+                                 Date_Of_Birth = all.Date_Of_Birth,
+                                 Department_Name = all.Department_Name,
+                                 Visit_Type = all.Visit_Type,
+                                 Gender = all.Gender
+                             };
+                
+                response.Data = result;
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccessful = false;
+                response.ErrorMessage = ex.ToString();
+            }
+            return response;
+        }
+
         public ServiceMessage<IEnumerable<IndexVM>> getAll()
         {
             var response = new ServiceMessage<IEnumerable<IndexVM>>();
@@ -60,9 +92,9 @@ namespace IMS.Services
                     byte[] imageByte = new byte[item.ContentLength];
                     item.InputStream.Read(imageByte, 0, item.ContentLength);
                     string consent = createVM.Consent.ToString();
-                    string MRN = db.Encounters.Where(x => x.First_Name == createVM.FirstName && x.Last_Name == createVM.LastName && x.Date_Of_Birth.ToString() == createVM.DOB && x.Contact_Date.ToString() == createVM.Appointment_Time).Select(x => x.PAT_MRN_ID).FirstOrDefault();
+                    string MRN = createVM.PAT_MRN;
                     //create DOV for file name
-                    string DOV = createVM.Appointment_Time.ToString().Replace('-', '.');
+                    string DOV = createVM.Appointment_Time.ToString().Replace('/', '.');
                     //adding name and DOV for the file extension
                     string saveTo = CreateFolders(createVM.LastName.ToString() + ", " + createVM.FirstName.ToString() + " DOV " + DOV + " (" +counter.ToString() + ")" + ".jpeg", createVM);                    
                     FileStream writeStream = new FileStream(saveTo, FileMode.Create, FileAccess.Write);
@@ -96,7 +128,7 @@ namespace IMS.Services
 
             // To create a string that specifies the path to a subfolder under your 
             // top-level folder, add a name for the subfolder to folderName.
-            string DOB = createVM.DOB.ToString().Replace('-', '.');
+            string DOB = createVM.DOB.ToString().Replace('/', '.');
             string pathString = System.IO.Path.Combine(folderName, createVM.LastName.ToString() + ", " + createVM.FirstName.ToString() + " DOB " + DOB);
 
             // Create the subfolder. You can verify in File Explorer that you have this
@@ -171,6 +203,11 @@ namespace IMS.Services
             var imageObj = db.EImage.Find(id);
             response.Data = imageObj;
             return imageObj;
+        }
+        public Encounter GetEcnounter(string PAT_ENC_CSN_ID)
+        {
+            var obj = db.Encounters.Find(PAT_ENC_CSN_ID);
+            return obj;
         }
         public void Dispose()
         {

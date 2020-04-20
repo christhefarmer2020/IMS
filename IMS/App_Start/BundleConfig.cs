@@ -13,13 +13,15 @@ namespace IMS
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
+            bundles.Add(new ScriptBundle("~/bundles/mydatatables").Include(
+                        "~/Scripts/mydatatablescript.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/dataTables").Include(
-                        "~/Scripts/DataTables/jquery.dataTables.min.js", "~/Scripts/flatpickr.js","~/Scripts/buttons.colVis.min.js",
-                        "~/Scripts/dataTables.buttons.min.js"));
+                        "~/Scripts/DataTables/jquery.dataTables.min.js", "~/Scripts/flatpickr.js","~/Scripts/DataTables/buttons.colVis.min.js",
+                        "~/Scripts/DataTables/dataTables.buttons.min.js"));
 
             bundles.Add(new StyleBundle("~/bundles/dataTablesStyles").Include(
-                        "~/Content/DataTables/css/jquery.dataTables.css", "~/Content/flatpickr.min.css"));
+                        "~/Content/DataTables/css/jquery.dataTables.css", "~/Content/flatpickr.min.css", "~/Content/DataTables/css/buttons.dataTables.min.css"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
