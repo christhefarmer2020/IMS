@@ -91,10 +91,14 @@
         <div class="col-md-10">
 
 
-            <select name="Consent" size="4" multiple="multiple" style="width:200px">
+            <select name="Consent" size="4" multiple="multiple" style="width:400px">
                 <option value="Present">Present</option>
                 <option value="Publish">Publish</option>
                 <option value="Face To Gene">Face To Gene</option>
+                <option value="Present & Publish">Present & Publish</option>
+                <option value="Present & Face To Gene">Present & Face To Gene</option>
+                <option value="Publish & Face To Gene">Publish & Face To Gene</option>
+                <option value="Present, Publish, & Face To Gene">Present, Publish, & Face To Gene</option>
             </select>
 
             @Html.ValidationMessageFor(model => model.Consent, "", new { @class = "text-danger" })
