@@ -14,14 +14,14 @@ namespace IMS.ViewModels
         [DisplayName("Provider")]
         public string Providers { get; set; }
         [DisplayName("Contact Date")]
-        public DateTime? Contact_Date { get; set; }
+        public string Contact_Date { get; set; }
 
         [DisplayName("First Name")]
         public string First_Name { get; set; }
         [DisplayName("Last Name")]
         public string Last_Name { get; set; }
         [DisplayName("Date of Birth")]
-        public DateTime? Date_Of_Birth { get; set; }
+        public string Date_Of_Birth { get; set; }
         [DisplayName("Department Name")]
         public string Department_Name { get; set; }
         [DisplayName("Visit Type")]

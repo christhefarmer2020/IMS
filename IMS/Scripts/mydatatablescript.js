@@ -3,7 +3,6 @@
 $(document).ready(function () {
     $('#myTable').DataTable({
         orderCellsTop: true,
-        stateSave: true,
         dom: 'Bfrtip',
         buttons: [
             'colvis'
