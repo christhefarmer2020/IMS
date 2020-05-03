@@ -14,7 +14,7 @@ namespace IMS.ViewModels
         [DisplayName("Provider")]
         public string Providers { get; set; }
         [DisplayName("Contact Date")]
-        public string Contact_Date { get; set; }
+        public DateTime Contact_Date { get; set; }
 
         [DisplayName("First Name")]
         public string First_Name { get; set; }

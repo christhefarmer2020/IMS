@@ -19,6 +19,8 @@ namespace IMS.Services
             var response = new ServiceMessage<IEnumerable<searchEncounterVM>>();
             try
             {
+                var date1 = DateTime.Today.AddMonths(-1);
+                var date2 = DateTime.Today.AddMonths(1);
                 var allEncounters = db.Encounters.ToList();
                 var result = from all in allEncounters
                              select new searchEncounterVM
@@ -26,7 +28,7 @@ namespace IMS.Services
                                  PAT_ENC_CSN_ID = all.PAT_ENC_CSN_ID,
                                  PAT_MRN = all.PAT_MRN_ID,
                                  Providers = all.Provider_1 + ", " + all.Provider_2 + ", " + all.Provider_3 + ", " + all.Provider_4,
-                                 Contact_Date = all.Contact_Date.ToShortDateString(),
+                                 Contact_Date = all.Contact_Date,
                                  First_Name = all.First_Name,
                                  Last_Name = all.Last_Name,
                                  Date_Of_Birth = all.Date_Of_Birth.ToShortDateString(),
@@ -34,7 +36,8 @@ namespace IMS.Services
                                  Visit_Type = all.Visit_Type,
                                  Gender = all.Gender
                              };
-                
+                result = result.Where(d => d.Contact_Date >= date1 && d.Contact_Date <= date2);
+
                 response.Data = result;
             }
             catch (Exception ex)
